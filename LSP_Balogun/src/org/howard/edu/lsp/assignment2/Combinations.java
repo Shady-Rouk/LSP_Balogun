@@ -25,8 +25,7 @@ public class Combinations {
 			HashSet<Integer> combinationSet = new HashSet<Integer>();
 			combinationSet.add(0);
 			combinations.add(combinationSet);
-		}
-		else {
+		} else {
 			for (int i=0; i<input.length; i++) {
 				int runningSum = input[i];
 				HashSet<Integer> combinationSet = new HashSet<Integer>();
