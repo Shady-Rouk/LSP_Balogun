@@ -21,32 +21,39 @@ public class Combinations {
 	@SuppressWarnings("unchecked")
 	public void compute(int[] input, int sum) {
 		ArrayList<HashSet<Integer>> combinations = new ArrayList<HashSet<Integer>>();
-		for (int i=0; i<input.length; i++) {
-			int runningSum = input[i];
+		if (input.length == 1 && input[0] == sum) {
 			HashSet<Integer> combinationSet = new HashSet<Integer>();
-			combinationSet.add(i);
-			for (int j=0; j<input.length; j++) {
-				if (i==j) {
-					continue;
-				}
-				runningSum += input[j];
-				if (runningSum < sum) {
-					combinationSet.add(j);
-				} else if (runningSum > sum) {
-					runningSum -= input[j];
-					if (runningSum == sum && !combinations.contains(combinationSet)) {
-						combinations.add((HashSet<Integer>)combinationSet.clone());
+			combinationSet.add(0);
+			combinations.add(combinationSet);
+		}
+		else {
+			for (int i=0; i<input.length; i++) {
+				int runningSum = input[i];
+				HashSet<Integer> combinationSet = new HashSet<Integer>();
+				combinationSet.add(i);
+				for (int j=0; j<input.length; j++) {
+					if (i==j) {
+						continue;
 					}
-				} else {
-					combinationSet.add(j);
-					if (!combinations.contains(combinationSet)) {
-						combinations.add((HashSet<Integer>)combinationSet.clone());
+					runningSum += input[j];
+					if (runningSum < sum) {
+						combinationSet.add(j);
+					} else if (runningSum > sum) {
+						runningSum -= input[j];
+						if (runningSum == sum && !combinations.contains(combinationSet)) {
+							combinations.add((HashSet<Integer>)combinationSet.clone());
+						}
+					} else {
+						combinationSet.add(j);
+						if (!combinations.contains(combinationSet)) {
+							combinations.add((HashSet<Integer>)combinationSet.clone());
+						}
+						combinationSet.clear();
+						combinationSet.add(i);
+						runningSum = input[i];
 					}
-					combinationSet.clear();
-					combinationSet.add(i);
-					runningSum = input[i];
+					
 				}
-				
 			}
 		}
 		printComputeOutput(input, sum, combinations);
