@@ -1,4 +1,4 @@
-package org.howard.edu.lsp.assignment2;
+package org.howard.edu.lsp.assignment3;
 
 /**
  * Farouk Balogun
