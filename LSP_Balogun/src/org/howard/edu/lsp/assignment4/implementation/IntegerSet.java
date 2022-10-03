@@ -24,13 +24,14 @@ public class IntegerSet {
 	 * The set starts out empty (without any elements).
 	 */
 	public IntegerSet() {
+		this.set = new ArrayList<Integer>();
 	}
 	
 	/**
 	 * This method clears the internal representation of the set, leaving it empty.
 	 */
 	public void clear() {
-		set.clear();
+		this.set.clear();
 	}
 	
 	/**
@@ -38,7 +39,7 @@ public class IntegerSet {
 	 * @return the number of elements in the set.
 	 */
 	public int length() {
-		return set.size();
+		return this.set.size();
 	}
 	
 	/**
@@ -49,11 +50,11 @@ public class IntegerSet {
 	 * @return true if the set is equal to b, else false.
 	 */
 	public boolean equals(IntegerSet b) {
-		if (set.size() != b.length()) {
+		if (this.set.size() != b.length()) {
 			return false;
 		} 
-		for (int i=0; i < set.size(); i++) {
-			if (!b.contains(set.get(i))) {
+		for (int i=0; i < this.set.size(); i++) {
+			if (!b.contains(this.set.get(i))) {
 				return false;
 			}
 		}
@@ -67,7 +68,7 @@ public class IntegerSet {
 	 * @return true if the set contains value, else false.
 	 */
 	public boolean contains(int value) {
-		return set.contains(value);
+		return this.set.contains(value);
 	}
 	
 	/**
@@ -77,12 +78,12 @@ public class IntegerSet {
 	 */
 	public int largest() throws IntegerSetException {
 		int currentMaximum = Integer.MIN_VALUE;
-		if (set.size() == 0) {
+		if (this.set.size() == 0) {
 			throw new IntegerSetException("Error calling largest(). The IntegerSet is empty.");
 		}
-		for (int i=0; i<set.size(); i++) {
-			if (set.get(i) > currentMaximum) {
-				currentMaximum = set.get(i);
+		for (int i=0; i<this.set.size(); i++) {
+			if (this.set.get(i) > currentMaximum) {
+				currentMaximum = this.set.get(i);
 			}
 		}
 		return currentMaximum;
@@ -95,12 +96,12 @@ public class IntegerSet {
 	 */
 	public int smallest() throws IntegerSetException {
 		int currentMinimum = Integer.MAX_VALUE;
-		if (set.size() == 0) {
+		if (this.set.size() == 0) {
 			throw new IntegerSetException("Error calling smallest(). The IntegerSet is empty.");
 		}
-		for (int i=0; i<set.size(); i++) {
-			if (set.get(i) < currentMinimum) {
-				currentMinimum = set.get(i);
+		for (int i=0; i<this.set.size(); i++) {
+			if (this.set.get(i) < currentMinimum) {
+				currentMinimum = this.set.get(i);
 			}
 		}
 		return currentMinimum;
@@ -112,8 +113,8 @@ public class IntegerSet {
 	 * @param item The integer being added to the set.
 	 */
 	public void add(int item) {
-		if (!set.contains(item)) {
-			set.add(item);
+		if (!this.set.contains(item)) {
+			this.set.add(item);
 		}
 	}
 	
@@ -123,9 +124,9 @@ public class IntegerSet {
 	 * @param item The integer to be removed from the set.
 	 */
 	public void remove(int item) {
-		if (set.contains(item)) {
-			int itemIdx = set.indexOf(item);
-			set.remove(itemIdx);
+		if (this.set.contains(item)) {
+			int itemIdx = this.set.indexOf(item);
+			this.set.remove(itemIdx);
 		}
 	}
 	
@@ -136,12 +137,12 @@ public class IntegerSet {
 	public void union(IntegerSet intSetb) {
 		List<Integer> numbersToAdd= new ArrayList<Integer>();
 		for (int i=0; i<intSetb.set.size(); i++) {
-			if (!set.contains(intSetb.set.get(i))) {
+			if (!this.set.contains(intSetb.set.get(i))) {
 				numbersToAdd.add(intSetb.set.get(i));
 			}
 		}
 		for (int number: numbersToAdd) {
-			set.add(number);
+			this.set.add(number);
 		}
 	}
 	
@@ -152,14 +153,14 @@ public class IntegerSet {
 	 */
 	public void intersect(IntegerSet intSetb) {
 		List<Integer> numbersToGo = new ArrayList<Integer>();
-		for (int i=0; i<set.size(); i++) {
-			if (!intSetb.set.contains(set.get(i))) {
-				numbersToGo.add(set.get(i));
+		for (int i=0; i<this.set.size(); i++) {
+			if (!intSetb.set.contains(this.set.get(i))) {
+				numbersToGo.add(this.set.get(i));
 			}
 		}
 		for (int number: numbersToGo) {
-			int numIdx = set.indexOf(number);
-			set.remove(numIdx);
+			int numIdx = this.set.indexOf(number);
+			this.set.remove(numIdx);
 		}
 	}
 	
@@ -170,14 +171,14 @@ public class IntegerSet {
 	 */
 	public void diff(IntegerSet intSetb) {
 		List<Integer> numbersToGo = new ArrayList<Integer>();
-		for (int i=0; i<set.size(); i++) {
-			if (intSetb.set.contains(set.get(i))) {
-				numbersToGo.add(set.get(i));
+		for (int i=0; i<this.set.size(); i++) {
+			if (intSetb.set.contains(this.set.get(i))) {
+				numbersToGo.add(this.set.get(i));
 			}
 		}
 		for (int number: numbersToGo) {
-			int numIdx = set.indexOf(number);
-			set.remove(numIdx);
+			int numIdx = this.set.indexOf(number);
+			this.set.remove(numIdx);
 		}
 	}
 	
@@ -186,7 +187,7 @@ public class IntegerSet {
 	 * @return true if the set is empty, else false.
 	 */
 	public boolean isEmpty() {
-		return set.size() == 0;
+		return this.set.size() == 0;
 	}
 	
 	/**
@@ -194,6 +195,6 @@ public class IntegerSet {
 	 * @return A string representation of the set.
 	 */
 	public String toString() {
-		return set.toString();
+		return this.set.toString();
 	}
 }
