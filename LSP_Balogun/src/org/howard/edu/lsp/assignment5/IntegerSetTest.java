@@ -59,6 +59,9 @@ public class IntegerSetTest {
 		// testing equals with two non-empty sets.
 		assertTrue(set1.equals(set2));
 		assertTrue(set2.equals(set1));
+		set1.remove(1);
+		assertFalse(set1.equals(set2));
+		assertFalse(set2.equals(set1));
 	}
 	
 	@Test
